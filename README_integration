@@ -1,12 +1,15 @@
-This code will read the "input.dat" file as the input file. Please kindly check and confirm that there will no strings in the input file, if it is there kindly remove it. The output will be shown on screen as well as save into the file named as 'output.dat'
+Code is designed to integrate the other columns with respect to the first column, you may change according to your problem.
 
-Code is designed to integrate the other columns with respect to the first column.
+This code will read the "input.dat" file as the input file. Please kindly check and confirm that there will no strings in the input file, if it is there kindly remove it. The output will be shown on screen as well as save into the file named 'output.dat'
 
-Please compile this programe by any fortran compiler. Here is the example to complie by gfortran complier
+Information required during running this program is the total no. of columns present in the 'input.dat' file. After this, it will ask you for the specific column no. on which you want to perform the integrations. Just provide these information and in the next step code will ask you for performing the integration for the whole data range or selected range (between any two data points given in the 1st column)
+
+
+Please compile this program with any Fortran compiler. Here is the example to compile by gfortran compiler.
 
 gfortran DOS-integration.f90 -o integration
 
-Note: 'input.dat' file has many columns, out of it any one can integrate any column.
+Note: 'input.dat' file has many columns, out of it anyone can integrate any column.
 
 feel free to contact me
 email me at msharma1@ph.iitr.ac.in
