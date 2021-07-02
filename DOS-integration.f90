@@ -25,7 +25,7 @@
 	character :: opt, tag(150), choice
 	open(1,file='input.dat',status='unknown')
 	open(2,file='output.dat',status='unknown')
-	print*, "Only numerical datas are required, if there's string then&
+	print*, "Only numerical datas are required, if there's string then &
         kindly remove it"
         print*,''
 	print*,'Enter the no of coloumns in the data file'
