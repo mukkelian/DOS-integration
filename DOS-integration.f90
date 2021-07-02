@@ -16,7 +16,7 @@
 ! along with this program; if not, write to the Free Software
 ! Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-!       UPDATE :: Feb 13 2021 @ 02:36 PM
+!       UPDATE :: Mar 12 2021 10:14 PM
 !       integeration based on simpson's method
 	implicit none
 	real, allocatable :: x(:),y(:,:)
@@ -30,9 +30,6 @@
         print*,''
 	print*,'Enter the no of coloumns in the data file'
 	read*,n_cl
-	print*,'Coloumn no. to integrate: LOOK into the input.dat file'
-	read*,cl
-        print*,''
         call system('rm -rf file')
         open(11,file ='file', status = 'unknown' )
         call system ("echo $(wc -l < input.dat) >> file")
@@ -42,12 +39,16 @@
 
 	allocate(x(0:var-1), y(0:var-1,2:n_cl))
 	x = 0; y = 0
-        print*,var
+        print"(' found ',i6,' lines')",var
 	do i= 0,var-1
 	read(1,*)x(i), (y(i,j),j =2, n_cl) 
 	end do
         close (1)
 
+101	print*,'Coloumn no. to integrate: LOOK into the input.dat file'
+	read*,cl
+        print*,''
+        
 	h = abs(x(0) - x(1))
 	
 	tag = '#'
@@ -55,22 +56,22 @@
 
 100	print*,''
 	print*,''
-	print*, 'Do you want to do for whole data set (y)'
-	print*,' or selected data range (n)'
+102	print*, 'Do you want to do for whole data set (y)'
+	print*,' or for data range (n)'
 	read*, opt
 
 	if (opt.eq.'n')then
 
-	print*, 'Here are the energy values!'
+	print*, 'Here are the points on x-axis'
 	write(*,10) x
 10	format (12f12.8,/)
 	write(*,11) tag
 
-	print*, 'Enter the value of Emax, Emin!'
-	print*, 'Emax'
+	print*, 'Enter the value of Xmax, Xmin!'
+	print*, 'Xmax'
 	read*, Emax
 
-	print*, 'Emin'
+	print*, 'Xmin'
 	read*, Emin
 
 	do i = 0, var-1
@@ -78,14 +79,14 @@
 	e_min = x(i)/Emin
         if(abs(x(i)-Emin).le.0.00001)then
 !	if (e_min == 1)then
-        print*, i,Emin,'(position - energy)'
+        print*, i,Emin,'(line no., X)'
 	e_n = i
 	end if
 
 	e_max = x(i)/Emax
         if (abs(x(i)-Emax).le.0.00001)then
 !	if (e_max == 1)then
-        print*, i,Emax,'(position - energy)'
+        print*, i,Emax,'(line no., X)'
 	e_m = i
 	end if
 
@@ -93,11 +94,19 @@
 
 	n = e_m+1-e_n
 
-	else
+        elseif(opt.eq.'y')then
 
 	n = var-1
 	e_n = 0; e_m = var-1
-
+	
+	Emin = x(e_m); Emax =x(e_n)
+	 
+        else
+        print*,''
+        print*,'please choose the option wisely!'
+        print*,'````````````````````````````````'
+        print*,''
+        goto 102
 	end if
 
 	write(2,3) n
@@ -122,7 +131,7 @@
         print*,''
         print*,''
         print*, 'for coloumn no.',cl
-        print*, 'for the energy range',Emin,'to', Emax
+        print*, 'for the X range',Emin,'to', Emax
 	print*,''
 	print*,''
 	print*, 'May the Force be with you!'
@@ -134,14 +143,20 @@
         print*,''
         print*,''
         print*,'Do you want to continue for the same coloumn'
-        print*,'press y for same coloumn or,'
-        print*,'press n for other coloumn'
+        print*,"press 'y' for same coloumn or,"
+        print*,"press 'n' for other coloumn"
         print*,'press any other key to exit'
         read*, choice
         choice_ : if(choice .eq.'y')then
                 goto 100
+        elseif(choice .eq.'n')then
+                goto 101
         else
-              print*,'Kindly see the output.dat, output file'
+              print*,"Kindly see the 'output.dat', output file"
+              print*,''
+              print*,'Thank you!'
+              print*,''
+              exit choice_
         endif choice_
 
 	stop
