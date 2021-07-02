@@ -1,0 +1,12 @@
+This code will read the "input.dat" file as the input file. Please kindly check and confirm that there will no strings in the input file, if it is there kindly remove it. The output will be shown on screen as well as save into the file named as 'output.dat'
+
+Code is designed to integrate the other columns with respect to the first column.
+
+Please compile this programe by any fortran compiler. Here is the example to complie by gfortran complier
+
+gfortran DOS-integration.f90 -o integration
+
+Note: 'input.dat' file has many columns, out of it any one can integrate any column.
+
+feel free to contact me
+email me at msharma1@ph.iitr.ac.in
