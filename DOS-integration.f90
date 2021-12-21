@@ -68,11 +68,11 @@
 	write(*,11) tag
 
 	print*, 'Enter the value of Xmax, Xmin!'
-	print*, 'Xmax'
-	read*, Emax
 
-	print*, 'Xmin'
+	print*, 'Xmin (lower limit)'
 	read*, Emin
+	print*, 'Xmax (upper limit)'
+	read*, Emax
 
 	do i = 0, var-1
 
